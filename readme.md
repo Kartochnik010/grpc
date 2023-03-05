@@ -1,3 +1,3 @@
 # gRPC demo project
 
-### My very first project featuring gGRPC
+### My very first project featuring gRPC
