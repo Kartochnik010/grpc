@@ -1,16 +1,31 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"demo/proto"
+	"log"
+	"net"
+
+	"google.golang.org/grpc"
 )
 
-func greet() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello, world!")
-	})
+const (
+	port = ":8080"
+)
+
+type helloServer struct {
+	proto.GreetServiceServer
 }
+
 func main() {
-	http.Handle("/", greet())
-	http.ListenAndServe(":8080", nil)
+
+	listener, err := net.Listen("tcp", port)
+	if err != nil {
+		panic(err)
+	}
+
+	grpcServer := grpc.NewServer()
+	proto.RegisterGreetServiceServer(grpcServer, &helloServer{})
+	if err := grpcServer.Serve(listener); err != nil {
+		log.Fatalln(err)
+	}
 }

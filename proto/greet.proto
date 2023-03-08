@@ -13,7 +13,7 @@ service GreetService{
 
 };
 
-message noParam{};
+message NoParam{};
 
 message HelloRequest{
     string name = 1;
