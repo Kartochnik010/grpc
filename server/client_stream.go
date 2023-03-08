@@ -18,7 +18,7 @@ func (h *helloServer) SayHelloClientStreaming(stream proto.GreetService_SayHello
 			return err
 		}
 		names = append(names, req.Name)
-		log.Println("Got request with name: ", req.Name)
+		log.Println("Client:", req.Name)
 	}
 
 	return nil

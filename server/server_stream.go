@@ -15,8 +15,9 @@ func (h *helloServer) SayHelloServerStreaming(req *proto.NamesList, stream proto
 		if err := stream.Send(res); err != nil {
 			return err
 		}
-
+		log.Println("Sent response with name:", name)
 		time.Sleep(time.Second)
 	}
+
 	return nil
 }
