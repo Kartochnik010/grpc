@@ -8,7 +8,7 @@ import (
 )
 
 func callSayHelloServerStream(client proto.GreetServiceClient, names *proto.NamesList) {
-	log.Println("Streaming started")
+	log.Println("Server streaming started")
 	stream, err := client.SayHelloServerStreaming(context.Background(), names)
 	if err != nil {
 		log.Fatalln("could not send names:", err)
@@ -21,7 +21,10 @@ func callSayHelloServerStream(client proto.GreetServiceClient, names *proto.Name
 		if err != nil {
 			log.Fatalln("error while streaming:", err)
 		}
-		log.Println(message.Message)
+		log.Println("Server:", message.Message)
 	}
-	log.Fatalln("Stream closed ")
+	if err := stream.CloseSend(); err != nil {
+		log.Println("Error while closing server stream:", err)
+	}
+	log.Fatalln("Server stream closed")
 }

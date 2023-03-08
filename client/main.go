@@ -23,13 +23,14 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := helloClient{proto.NewGreetServiceClient(conn)}
+	client := &helloClient{proto.NewGreetServiceClient(conn)}
 
 	names := &proto.NamesList{
-		Name: []string{"Ilyas", "Amir", "Uali"},
+		Name: []string{"Ziyash", "Ilyas", "Amir", "Uali", "Ailin", "Daniya", "Ailin"},
 	}
 
 	callSayHello(client)
+	// callSayHelloClientStreaming(client, names)
 	// callSayHelloServerStream(client, names)
-	callSayHelloClientStreaming(client, names)
+	callHelloBidirectionalStream(client, names)
 }

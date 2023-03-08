@@ -24,7 +24,8 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	proto.RegisterGreetServiceServer(grpcServer, &helloServer{})
+	srv := &helloServer{}
+	proto.RegisterGreetServiceServer(grpcServer, srv)
 	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatalln(err)
 	}

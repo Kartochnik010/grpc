@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func callSayHelloClientStreaming(client proto.GreetServiceClient, names *proto.NamesList) {
+func callHelloBidirectionalStream(client proto.GreetServiceClient, names *proto.NamesList) {
 	log.Println("Client streaming started")
 	stream, err := client.SayHelloClientStreaming(context.Background())
 	if err != nil {
